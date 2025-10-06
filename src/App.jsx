@@ -7,6 +7,7 @@ const App = () => {
   const [session, setSession] = useState(null);
 
   useEffect(() => {
+    // This is the correct way to get the session from the promise
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
     });
