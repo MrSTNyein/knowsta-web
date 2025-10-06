@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { supabase } from './lib/supabaseClient';
+import { supabase, handleAuthRedirect } from './lib/supabaseClient';
 import Auth from './components/Auth';
 import Account from './components/Account';
 
@@ -7,10 +7,14 @@ const App = () => {
   const [session, setSession] = useState(null);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
+    // Handle redirect after magic link login
+    handleAuthRedirect().then(() => {
+      supabase.auth.getSession().then(({ data: { session } }) => {
+        setSession(session);
+      });
     });
 
+    // Listen for auth state changes
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
