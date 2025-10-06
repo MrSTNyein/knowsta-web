@@ -1,86 +1,120 @@
+/* ===========================
+   App.css - Knowsta MVP
+   =========================== */
+
 /* Body and global styling */
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    background-color: #f0f2f5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: #f0f2f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Main form container */
 .form-widget {
-    max-width: 420px;
-    width: 100%;
-    padding: 40px;
-    border-radius: 12px;
-    background: #fff;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    box-sizing: border-box;
+  max-width: 420px;
+  width: 100%;
+  padding: 40px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  box-sizing: border-box;
 }
 
 /* Headers and descriptions */
 .header {
-    font-size: 28px;
-    font-weight: 700;
-    color: #333;
-    margin-bottom: 10px;
+  font-size: 28px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 10px;
 }
 
 .description {
-    font-size: 16px;
-    color: #666;
-    margin-bottom: 25px;
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 25px;
 }
 
 /* Form input fields */
-.inputField {
-    width: 100%;
-    padding: 12px 15px;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-sizing: border-box;
-    font-size: 16px;
+.input-field {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-size: 16px;
 }
 
 /* Buttons */
 .button {
-    width: 100%;
-    padding: 14px 20px;
-    margin-bottom: 15px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 600;
-    transition: background-color 0.3s ease;
+  width: 100%;
+  padding: 14px 20px;
+  margin-bottom: 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
 }
 
 .button.primary {
-    background-color: #007bff;
-    color: #fff;
+  background-color: #007bff;
+  color: #fff;
 }
 
-.button.primary:hover {
-    background-color: #0056b3;
+.button.primary:hover,
+.button.primary:focus {
+  background-color: #0056b3;
+  outline: none;
 }
 
 .button.secondary {
-    background-color: #f0f2f5;
-    color: #555;
-    border: 1px solid #ddd;
+  background-color: #f0f2f5;
+  color: #555;
+  border: 1px solid #ddd;
 }
 
-.button.secondary:hover {
-    background-color: #e0e2e5;
+.button.secondary:hover,
+.button.secondary:focus {
+  background-color: #e0e2e5;
+  outline: none;
 }
 
 /* Horizontal rule for visual separation */
 hr {
-    border: none;
-    border-top: 1px solid #eee;
-    margin: 25px 0;
+  border: none;
+  border-top: 1px solid #eee;
+  margin: 25px 0;
+}
+
+/* ===========================
+   Responsive adjustments
+   =========================== */
+@media (max-width: 480px) {
+  .form-widget {
+    padding: 20px;
+    width: 90%;
+  }
+
+  .header {
+    font-size: 24px;
+  }
+
+  .description {
+    font-size: 14px;
+  }
+
+  .button {
+    font-size: 15px;
+    padding: 12px 18px;
+  }
 }
