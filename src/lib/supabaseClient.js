@@ -6,7 +6,8 @@ const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-const basePath = '/knowsta-web/'; // GitHub Pages path
+// GitHub Pages path
+const basePath = '/knowsta-web/';
 const redirectUrl = window.location.origin + basePath;
 
 /**
@@ -30,22 +31,21 @@ export const sendMagicLink = async (email) => {
 };
 
 /**
- * Handle magic link redirect
+ * Get current session
+ * Works after redirect automatically
  */
-export const handleAuthRedirect = async () => {
-  const { data: { session }, error } = await supabase.auth.getSession();
+export const getCurrentSession = () => {
+  const { data } = supabase.auth.getSession();
+  return data.session;
+};
 
-  if (error) {
-    console.error('Error getting session:', error.message);
-    return null;
-  }
-
-  if (!session) {
-    // If no session, try to get it from URL after redirect
-    const { data, error: signInError } = await supabase.auth.getSessionFromUrl?.();
-    if (signInError) console.error('Error handling redirect:', signInError.message);
-    return data?.session || null;
-  }
-
-  return session;
+/**
+ * Subscribe to auth changes (login/logout)
+ * Call this in App.jsx to update session state
+ */
+export const subscribeAuthChanges = (callback) => {
+  const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    callback(session);
+  });
+  return subscription;
 };
