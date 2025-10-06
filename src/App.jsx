@@ -7,21 +7,19 @@ const App = () => {
   const [session, setSession] = useState(null);
 
   useEffect(() => {
-    // Handle redirect after magic link login
-    handleAuthRedirect().then(() => {
-      supabase.auth.getSession().then(({ data: { session } }) => {
+    const initSession = async () => {
+      const currentSession = supabase.auth.getSession()?.data.session;
+      setSession(currentSession);
+
+      // Listen for auth state changes
+      const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
         setSession(session);
       });
-    });
 
-    // Listen for auth state changes
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-    });
+      return () => subscription.unsubscribe();
+    };
 
-    return () => subscription.unsubscribe();
+    initSession();
   }, []);
 
   return (
